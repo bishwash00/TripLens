@@ -1,0 +1,22 @@
+{
+  "name": "triplens",
+  "version": "1.0.0",
+  "description": "TripLens - Discover Your Next Destination",
+  "license": "ISC",
+  "author": "Bishwash Karki",
+  "type": "commonjs",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --dist-dir ./dist"
+  },
+  "devDependencies": {
+    "@parcel/resolver-glob": "^2.16.3",
+    "@parcel/transformer-sass": "^2.16.3",
+    "parcel": "^2.16.3"
+  },
+  "dependencies": {
+    "core-js": "^3.47.0",
+    "regenerator-runtime": "^0.14.1",
+    "sass": "^1.97.2"
+  }
+}

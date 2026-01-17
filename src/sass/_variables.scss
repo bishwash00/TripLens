@@ -1,0 +1,53 @@
+// Color Palette
+$color-primary: #01161e;
+$color-secondary: #124559;
+$color-tertiary: #598392;
+$color-accent: #aec3b0;
+$color-light: #eff6e0;
+$color-white: #ffffff;
+
+// Status Colors
+$color-success: #22c55e;
+$color-warning: #f59e0b;
+$color-error: #ef4444;
+$color-info: #3b82f6;
+
+// Typography
+$font-family: 'Poppins', sans-serif;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+
+// Border Radius
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba($color-primary, 0.08);
+$shadow-md: 0 4px 16px rgba($color-primary, 0.12);
+$shadow-lg: 0 8px 32px rgba($color-primary, 0.16);
+$shadow-xl: 0 12px 48px rgba($color-primary, 0.2);
+
+// Transitions
+$transition-base: all 0.3s ease;
+$transition-fast: all 0.15s ease;
+$transition-slow: all 0.5s ease;
+
+// Z-indexes
+$z-dropdown: 50;
+$z-sticky: 100;
+$z-overlay: 200;
+$z-modal: 300;
+$z-toast: 400;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;

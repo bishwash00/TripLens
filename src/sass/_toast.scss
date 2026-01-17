@@ -1,0 +1,140 @@
+// Toast Notifications
+.toast-container {
+  position: fixed;
+  bottom: $spacing-lg;
+  right: $spacing-lg;
+  z-index: $z-toast;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  max-width: 400px;
+  pointer-events: none;
+
+  @media (max-width: $breakpoint-sm) {
+    left: $spacing-sm;
+    right: $spacing-sm;
+    bottom: $spacing-sm;
+    max-width: none;
+  }
+}
+
+.toast {
+  background: $color-white;
+  border-radius: $radius-md;
+  box-shadow: $shadow-lg;
+  padding: $spacing-md;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  pointer-events: auto;
+  animation: toastSlideIn 0.3s ease;
+  border-left: 4px solid;
+
+  &--success {
+    border-color: $color-success;
+
+    .toast__icon {
+      color: $color-success;
+    }
+  }
+
+  &--error {
+    border-color: $color-error;
+
+    .toast__icon {
+      color: $color-error;
+    }
+  }
+
+  &--warning {
+    border-color: $color-warning;
+
+    .toast__icon {
+      color: $color-warning;
+    }
+  }
+
+  &--info {
+    border-color: $color-info;
+
+    .toast__icon {
+      color: $color-info;
+    }
+  }
+
+  &.removing {
+    animation: toastSlideOut 0.3s ease forwards;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5px;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $color-primary;
+    margin-bottom: 2px;
+  }
+
+  &__message {
+    font-size: 0.85rem;
+    color: $color-tertiary;
+    line-height: 1.4;
+  }
+
+  &__close {
+    padding: 4px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: $transition-fast;
+    flex-shrink: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.5px;
+      color: $color-tertiary;
+    }
+
+    &:hover {
+      background: $color-light;
+
+      svg {
+        color: $color-primary;
+      }
+    }
+  }
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

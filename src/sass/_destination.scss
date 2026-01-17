@@ -1,0 +1,76 @@
+.destination {
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__flag {
+    width: 80px;
+    height: auto;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-sm;
+    object-fit: cover;
+  }
+
+  &__titles {
+    flex: 1;
+  }
+
+  &__city {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $color-primary;
+    margin-bottom: $spacing-xs;
+    line-height: 1.2;
+  }
+
+  &__country {
+    font-size: 1.25rem;
+    color: $color-tertiary;
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: $spacing-md;
+  }
+
+  &__info-item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: $color-light;
+    border-radius: $radius-md;
+    transition: $transition-base;
+
+    &:hover {
+      background: darken($color-light, 3%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__info-icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5px;
+    color: $color-tertiary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__label {
+    font-size: 0.75rem;
+    color: $color-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  &__value {
+    font-size: 1rem;
+    color: $color-secondary;
+    font-weight: 600;
+  }
+}

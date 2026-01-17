@@ -1,0 +1,228 @@
+.header {
+  background: $color-primary;
+  color: $color-white;
+  padding: $spacing-md $spacing-lg;
+  box-shadow: $shadow-md;
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+
+  &__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__logo-icon {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2.5px;
+  }
+
+  &__logo-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  &__search {
+    flex: 1;
+    position: relative;
+    max-width: 600px;
+  }
+
+  &__search-icon {
+    position: absolute;
+    left: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5px;
+    color: $color-tertiary;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__search-input {
+    width: 100%;
+    padding: $spacing-sm $spacing-sm $spacing-sm 3rem;
+    border: 2px solid transparent;
+    border-radius: $radius-lg;
+    font-family: $font-family;
+    font-size: 1rem;
+    background: rgba($color-white, 0.1);
+    color: $color-white;
+    transition: $transition-base;
+
+    &::placeholder {
+      color: rgba($color-white, 0.6);
+    }
+
+    &:focus {
+      outline: none;
+      background: rgba($color-white, 0.15);
+      border-color: $color-accent;
+    }
+  }
+
+  &__suggestions {
+    position: absolute;
+    top: calc(100% + $spacing-xs);
+    left: 0;
+    right: 0;
+    background: $color-white;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    overflow: hidden;
+    z-index: $z-dropdown;
+    max-height: 300px;
+    overflow-y: auto;
+
+    .suggestions__list {
+      padding: $spacing-xs;
+    }
+
+    .suggestion-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm;
+      border-radius: $radius-sm;
+      cursor: pointer;
+      transition: $transition-fast;
+      color: $color-primary;
+
+      &:hover {
+        background: $color-light;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+        color: $color-tertiary;
+        stroke-width: 2.5px;
+      }
+
+      &__text {
+        font-size: 0.9rem;
+      }
+
+      &__type {
+        margin-left: auto;
+        font-size: 0.75rem;
+        color: $color-tertiary;
+        background: $color-light;
+        padding: 2px 8px;
+        border-radius: $radius-sm;
+      }
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__nav-btn {
+    position: relative;
+    padding: $spacing-sm;
+    background: rgba($color-white, 0.1);
+    border: 2px solid transparent;
+    border-radius: $radius-md;
+    cursor: pointer;
+    transition: $transition-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.5px;
+      color: $color-white;
+    }
+
+    &:hover {
+      background: rgba($color-white, 0.2);
+      border-color: $color-accent;
+      transform: translateY(-2px);
+    }
+  }
+
+  &__nav-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $color-white;
+
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &__compare {
+    &.active {
+      background: $color-accent;
+      border-color: $color-accent;
+
+      svg {
+        color: $color-primary;
+      }
+
+      .header__nav-text {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__bookmark-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: $color-accent;
+    color: $color-primary;
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// Offline Banner
+.offline-banner {
+  background: $color-warning;
+  color: $color-primary;
+  padding: $spacing-sm $spacing-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  font-weight: 500;
+  font-size: 0.9rem;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5px;
+  }
+}

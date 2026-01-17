@@ -1,0 +1,20 @@
+// ========================================
+// TripLens - Main Stylesheet
+// ========================================
+
+// Import all modules in the correct order
+@import 'variables';
+@import 'reset';
+@import 'animations';
+@import 'header';
+@import 'layout';
+@import 'card';
+@import 'destination';
+@import 'weather';
+@import 'timezone';
+@import 'map';
+@import 'saved-trips';
+@import 'recent-searches';
+@import 'compare';
+@import 'toast';
+@import 'responsive';

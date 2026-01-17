@@ -1,0 +1,230 @@
+.card {
+  background: $color-white;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+  transition: $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-4px);
+  }
+
+  &--destination {
+    grid-column: 1 / -1;
+  }
+
+  &--map {
+    grid-column: 1 / -1;
+  }
+
+  &__header {
+    padding: $spacing-md;
+    border-bottom: 2px solid $color-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: $color-secondary;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5px;
+    color: $color-tertiary;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__action {
+    padding: $spacing-xs;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: $transition-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.5px;
+      color: $color-tertiary;
+    }
+
+    &:hover {
+      background: $color-light;
+
+      svg {
+        color: $color-secondary;
+      }
+    }
+
+    &.btn--save {
+      &.saved {
+        svg {
+          fill: $color-accent;
+          color: $color-accent;
+        }
+      }
+    }
+  }
+
+  &__count {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $color-tertiary;
+    background: $color-light;
+    padding: 2px 10px;
+    border-radius: $radius-full;
+  }
+
+  &__clear {
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover svg {
+      color: $color-error;
+    }
+  }
+
+  &__content {
+    padding: $spacing-md;
+
+    &--map {
+      padding: 0;
+      position: relative;
+    }
+  }
+}
+
+// Skeleton Loading States
+.skeleton {
+  &__line {
+    background: linear-gradient(
+      90deg,
+      $color-light 0%,
+      darken($color-light, 5%) 50%,
+      $color-light 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: $radius-sm;
+    height: 16px;
+    margin-bottom: $spacing-sm;
+
+    &--sm {
+      width: 30%;
+      height: 12px;
+    }
+
+    &--md {
+      width: 60%;
+    }
+
+    &--lg {
+      width: 80%;
+      height: 24px;
+    }
+
+    &--xl {
+      width: 50%;
+      height: 48px;
+    }
+  }
+
+  &__box {
+    background: linear-gradient(
+      90deg,
+      $color-light 0%,
+      darken($color-light, 5%) 50%,
+      $color-light 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: $radius-sm;
+    height: 60px;
+  }
+
+  &__circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(
+      90deg,
+      $color-light 0%,
+      darken($color-light, 5%) 50%,
+      $color-light 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    margin: 0 auto $spacing-md;
+  }
+
+  &__flag {
+    width: 80px;
+    height: 54px;
+    border-radius: $radius-sm;
+    background: linear-gradient(
+      90deg,
+      $color-light 0%,
+      darken($color-light, 5%) 50%,
+      $color-light 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    margin-bottom: $spacing-md;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+  }
+
+  &__weather-main {
+    text-align: center;
+    padding-bottom: $spacing-md;
+    border-bottom: 2px solid $color-light;
+    margin-bottom: $spacing-md;
+  }
+
+  &__weather-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+  }
+
+  &__sun-times {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    margin-top: $spacing-md;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

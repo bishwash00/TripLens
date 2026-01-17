@@ -1,0 +1,118 @@
+.weather {
+  &__current {
+    text-align: center;
+    padding: $spacing-md 0 $spacing-lg;
+    border-bottom: 2px solid $color-light;
+    margin-bottom: $spacing-md;
+  }
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__temp {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: $color-secondary;
+    margin-bottom: $spacing-xs;
+    line-height: 1;
+  }
+
+  &__condition {
+    font-size: 1.25rem;
+    color: $color-tertiary;
+    margin-bottom: $spacing-md;
+  }
+
+  &__details {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+  }
+
+  &__detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    min-width: 80px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2px;
+      color: $color-tertiary;
+    }
+  }
+
+  &__detail-label {
+    font-size: 0.75rem;
+    color: $color-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &__detail-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-secondary;
+  }
+
+  &__forecast {
+    &-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $color-secondary;
+      margin-bottom: $spacing-md;
+    }
+  }
+}
+
+.forecast {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__day {
+    display: grid;
+    grid-template-columns: 80px 40px 1fr auto;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm;
+    background: $color-light;
+    border-radius: $radius-sm;
+    transition: $transition-base;
+
+    &:hover {
+      background: darken($color-light, 5%);
+      transform: translateX(4px);
+    }
+  }
+
+  &__date {
+    font-weight: 500;
+    color: $color-secondary;
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    justify-self: center;
+  }
+
+  &__condition {
+    font-size: 0.875rem;
+    color: $color-tertiary;
+  }
+
+  &__temp {
+    font-weight: 600;
+    color: $color-secondary;
+    text-align: right;
+  }
+}

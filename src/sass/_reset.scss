@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-family;
+  background: linear-gradient(
+    135deg,
+    $color-light 0%,
+    lighten($color-accent, 15%) 100%
+  );
+  color: $color-primary;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// Utility Classes
+.hidden {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Button Base Styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  font-family: $font-family;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &--primary {
+    background: $color-secondary;
+    color: $color-white;
+
+    &:hover {
+      background: darken($color-secondary, 10%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--secondary {
+    background: $color-light;
+    color: $color-secondary;
+
+    &:hover {
+      background: darken($color-light, 5%);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-secondary;
+
+    &:hover {
+      background: rgba($color-secondary, 0.1);
+    }
+  }
+
+  &--icon {
+    padding: $spacing-xs;
+    border-radius: $radius-sm;
+  }
+}
+
+// Scrollbar Styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-light;
+  border-radius: $radius-sm;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-tertiary;
+  border-radius: $radius-sm;
+
+  &:hover {
+    background: $color-secondary;
+  }
+}
+
+// Selection
+::selection {
+  background: rgba($color-accent, 0.5);
+  color: $color-primary;
+}

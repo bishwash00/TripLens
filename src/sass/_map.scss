@@ -1,0 +1,102 @@
+.map {
+  height: 400px;
+  width: 100%;
+  background: $color-light;
+  position: relative;
+
+  // Leaflet map container
+  #map {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &__placeholder {
+    height: 100%;
+    background: linear-gradient(135deg, $color-accent 0%, $color-tertiary 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-white;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  &__coordinates {
+    position: absolute;
+    bottom: $spacing-sm;
+    left: $spacing-sm;
+    background: rgba($color-white, 0.95);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $color-secondary;
+    display: flex;
+    gap: $spacing-sm;
+    z-index: 10;
+    box-shadow: $shadow-sm;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__lat,
+  &__lng {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  &__zoom-in,
+  &__zoom-out,
+  &__fullscreen {
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+// Map marker popup styling
+.leaflet-popup-content-wrapper {
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+}
+
+.leaflet-popup-content {
+  margin: $spacing-sm;
+  font-family: $font-family;
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-primary;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: $color-tertiary;
+  }
+}
+
+.leaflet-popup-tip {
+  background: $color-white;
+  box-shadow: $shadow-sm;
+}
+
+// Map fullscreen mode
+.card--map.fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  border-radius: 0;
+  margin: 0;
+
+  .card__content--map {
+    height: calc(100vh - 60px);
+  }
+
+  .map {
+    height: 100%;
+  }
+}

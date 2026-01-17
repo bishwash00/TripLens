@@ -1,0 +1,200 @@
+.saved-trips {
+  &__empty {
+    text-align: center;
+    padding: $spacing-lg;
+    color: $color-tertiary;
+
+    svg {
+      width: 48px;
+      height: 48px;
+      stroke-width: 1.5px;
+      margin-bottom: $spacing-md;
+      opacity: 0.5;
+    }
+
+    p {
+      font-weight: 500;
+      margin-bottom: $spacing-xs;
+      color: $color-secondary;
+    }
+
+    span {
+      font-size: 0.875rem;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+.trip {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: $color-light;
+  border-radius: $radius-md;
+  transition: $transition-base;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($color-light, 5%);
+    transform: translateX(4px);
+  }
+
+  &__flag {
+    width: 36px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: $shadow-sm;
+    object-fit: cover;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__city {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-secondary;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__country {
+    font-size: 0.875rem;
+    color: $color-tertiary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__remove {
+    padding: $spacing-xs;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: $radius-sm;
+    transition: $transition-base;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.5px;
+      color: $color-tertiary;
+    }
+
+    &:hover {
+      background: rgba($color-error, 0.1);
+
+      svg {
+        color: $color-error;
+      }
+    }
+  }
+}
+
+// Bookmarks Panel (Slide-out)
+.bookmarks-panel {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($color-primary, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  &__content {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 400px;
+    max-width: 90vw;
+    background: $color-white;
+    box-shadow: $shadow-xl;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease;
+  }
+
+  &__header {
+    padding: $spacing-md;
+    border-bottom: 2px solid $color-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: $color-secondary;
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        stroke-width: 2.5px;
+        color: $color-tertiary;
+      }
+    }
+  }
+
+  &__close {
+    padding: $spacing-xs;
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    cursor: pointer;
+    transition: $transition-base;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.5px;
+      color: $color-tertiary;
+    }
+
+    &:hover {
+      background: $color-light;
+
+      svg {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__list {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

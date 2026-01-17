@@ -1,0 +1,123 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: $spacing-lg;
+  position: relative;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+
+  @media (max-width: $breakpoint-lg) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Error Message Container
+.error {
+  grid-column: 1 / -1;
+  padding: $spacing-xl;
+
+  &__content {
+    background: $color-white;
+    border-radius: $radius-lg;
+    padding: $spacing-xl;
+    text-align: center;
+    box-shadow: $shadow-md;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  &__icon {
+    width: 64px;
+    height: 64px;
+    color: $color-error;
+    stroke-width: 2px;
+    margin-bottom: $spacing-md;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $color-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__message {
+    color: $color-tertiary;
+    margin-bottom: $spacing-lg;
+    line-height: 1.6;
+  }
+
+  &__btn {
+    min-width: 150px;
+  }
+}
+
+// Loading Overlay
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba($color-primary, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  z-index: $z-overlay;
+
+  &__text {
+    color: $color-white;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+}
+
+// Spinner
+.spinner {
+  &__circle {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba($color-white, 0.3);
+    border-top-color: $color-accent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,80 @@
+.timezone {
+  text-align: center;
+
+  &__time {
+    font-size: 3rem;
+    font-weight: 700;
+    color: $color-secondary;
+    margin-bottom: $spacing-sm;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+  }
+
+  &__date {
+    font-size: 1.125rem;
+    color: $color-tertiary;
+    margin-bottom: $spacing-md;
+  }
+
+  &__zone {
+    font-size: 1rem;
+    color: $color-secondary;
+    font-weight: 500;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__offset {
+    font-size: 0.875rem;
+    color: $color-tertiary;
+    padding: $spacing-xs $spacing-md;
+    background: $color-light;
+    border-radius: $radius-sm;
+    display: inline-block;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__sun {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 2px solid $color-light;
+  }
+
+  &__sun-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm;
+    background: $color-light;
+    border-radius: $radius-md;
+    transition: $transition-base;
+
+    &:hover {
+      background: darken($color-light, 3%);
+    }
+
+    svg {
+      width: 28px;
+      height: 28px;
+      stroke-width: 2px;
+      color: $color-tertiary;
+    }
+  }
+
+  &__sun-label {
+    font-size: 0.75rem;
+    color: $color-tertiary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  &__sun-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $color-secondary;
+    font-variant-numeric: tabular-nums;
+  }
+}
