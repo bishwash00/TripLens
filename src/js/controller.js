@@ -5,6 +5,7 @@ import destinationView from './views/destinationView.js';
 import destinationSearchView from './views/destinationSearchView.js';
 import weatherView from './views/weatherView.js';
 import errorView from './views/errorView.js';
+import localTimeView from './views/localTimeView.js';
 
 import * as model from './model.js';
 
@@ -47,22 +48,28 @@ const controlDestinationSearch = async function () {
 
     renderDestinationData();
   } catch (err) {
-    errorView.render(err);
+    errorView.render(err, 'error');
   }
 };
 
 const renderDestinationData = function () {
   destinationView.render(model.state.destination);
   weatherView.render(model.state.destination.weather);
+  localTimeView.render(model.state.destination);
+  localTimeView.startClock();
 };
 
 const renderSkeletonLoaders = function () {
+  localTimeView.stopClock(); // Stop the clock before loading new data
   destinationView.renderSkeletonLoading();
   weatherView.renderSkeletonLoading();
+  localTimeView.renderSkeletonLoading();
 };
 
 const init = function () {
   initData();
+
   destinationSearchView.addHandlerSearch(controlDestinationSearch);
+  errorView.addHandlerErrorBtn(initData);
 };
 init();

@@ -20,6 +20,21 @@ class errorView extends View {
         </div>
       </div>`;
   }
+
+  addHandlerErrorBtn(handler) {
+    this._parentEl.addEventListener('click', e => {
+      const btn = e.target.closest('.error__btn');
+      if (!btn) return;
+
+      const errorEl = this._parentEl.querySelector('.error');
+      if (errorEl) errorEl.remove();
+
+      this._dashboard.classList.remove('hidden');
+      this._sidebar.classList.remove('hidden');
+
+      handler();
+    });
+  }
 }
 
 export default new errorView();

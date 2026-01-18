@@ -135,7 +135,7 @@ This avoids common bugs where dates appear **one day early or late**.
 1. Clone the repository
 
 ```
-git clone https://github.com/your-username/triplens.git
+git clone https://github.com/your-username/TripLens.git
 ```
 
 2. Install dependencies (none required)

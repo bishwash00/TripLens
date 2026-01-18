@@ -2,10 +2,11 @@ import 'regenerator-runtime/runtime.js';
 import {
   COUNTRY_API_URL_NAME,
   GEOCODE_API_URL,
-  GEOCODE_KEY,
+  BIG_DATA_CLOUD_KEY,
   OPENWEATHER_API_KEY,
   CURRENT_WEATHER_API_URL,
   WEATHER_FORECAST_API_URL,
+  TIME_API_URL,
 } from './config';
 import { getJSON } from './helpers';
 
@@ -18,6 +19,7 @@ export const state = {
       current: {},
       forecast: {},
     },
+    localTime: {},
   },
   location: {},
   bookmarks: [],
@@ -27,7 +29,7 @@ export const state = {
 export const getInitData = async function (lat, lng) {
   try {
     const data = await getJSON(
-      `${GEOCODE_API_URL}latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${GEOCODE_KEY}`
+      `${GEOCODE_API_URL}latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${BIG_DATA_CLOUD_KEY}`,
     );
 
     await getDestination(data.countryName);
@@ -40,6 +42,7 @@ const getDestinationObject = function (data) {
   return {
     countryName: data.name.common,
     capitalName: data.capital[0],
+    countryCode: data.cca2,
     countryFlag: data.flags.png,
     region: data.region,
     language: Object.values(data.languages)[0],
@@ -50,6 +53,7 @@ const getDestinationObject = function (data) {
       current: {},
       forecast: {},
     },
+    localTime: {},
   };
 };
 
@@ -61,6 +65,8 @@ const getCurrentWeather = function (data) {
     pressure: data.main.pressure,
     description: data.weather[0].description,
     icon: data.weather[0].icon,
+    sunrise: formatTime(data.sys.sunrise).slice(0, -3),
+    sunset: formatTime(data.sys.sunset).slice(0, -3),
   };
 };
 
@@ -99,6 +105,28 @@ const getForecastWeather = function (data) {
     }));
 };
 
+const formatTime = function (timestamp) {
+  return new Date(timestamp * 1000).toLocaleTimeString('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+};
+
+const getLocalTime = function (data) {
+  return {
+    effTimeZone: data.effectiveTimeZoneFull,
+    utc: data.utcOffset.length < 4 ? `${data.utcOffset}:00` : data.utcOffset,
+    time: data.localTime,
+    date: new Date(data.localTime).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+  };
+};
+
 export const getDestination = async function (locationName) {
   try {
     const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
@@ -111,20 +139,30 @@ export const getDestination = async function (locationName) {
 
 export const getWeather = async function (locationName) {
   try {
+    const query = `${locationName},${state.destination.countryCode}`;
+
     const [currentWeather, forecastWeather] = await Promise.all([
       getJSON(
-        `${CURRENT_WEATHER_API_URL}q=${locationName}&units=metric&appid=${OPENWEATHER_API_KEY}`
+        `${CURRENT_WEATHER_API_URL}q=${query}&units=metric&appid=${OPENWEATHER_API_KEY}`,
       ),
       getJSON(
-        `${WEATHER_FORECAST_API_URL}q=${locationName}&units=metric&appid=${OPENWEATHER_API_KEY}`
+        `${WEATHER_FORECAST_API_URL}q=${query}&units=metric&appid=${OPENWEATHER_API_KEY}`,
       ),
     ]);
+
+    console.log(currentWeather);
+    const currentTime = await getJSON(
+      `${TIME_API_URL}latitude=${currentWeather.coord.lat}&longitude=${currentWeather.coord.lon}&key=${BIG_DATA_CLOUD_KEY}`,
+    );
 
     state.destination.weather.current = getCurrentWeather(currentWeather);
 
     state.destination.weather.forecast = getForecastWeather(
-      forecastWeather.list
+      forecastWeather.list,
     );
+
+    console.log(currentTime);
+    state.destination.localTime = getLocalTime(currentTime);
   } catch (err) {
     throw err;
   }
