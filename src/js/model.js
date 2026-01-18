@@ -26,7 +26,7 @@ export const state = {
   recentSearches: [],
 };
 
-export const getInitData = async function (lat, lng) {
+export const getDataCoords = async function (lat, lng) {
   try {
     const data = await getJSON(
       `${GEOCODE_API_URL}latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${BIG_DATA_CLOUD_KEY}`,
@@ -67,6 +67,10 @@ const getCurrentWeather = function (data) {
     icon: data.weather[0].icon,
     sunrise: formatTime(data.sys.sunrise).slice(0, -3),
     sunset: formatTime(data.sys.sunset).slice(0, -3),
+    coords: {
+      lat: data.coord.lat,
+      lon: data.coord.lon,
+    },
   };
 };
 
@@ -150,7 +154,6 @@ export const getWeather = async function (locationName) {
       ),
     ]);
 
-    console.log(currentWeather);
     const currentTime = await getJSON(
       `${TIME_API_URL}latitude=${currentWeather.coord.lat}&longitude=${currentWeather.coord.lon}&key=${BIG_DATA_CLOUD_KEY}`,
     );
@@ -161,7 +164,6 @@ export const getWeather = async function (locationName) {
       forecastWeather.list,
     );
 
-    console.log(currentTime);
     state.destination.localTime = getLocalTime(currentTime);
   } catch (err) {
     throw err;

@@ -15,7 +15,7 @@ export const getJSON = async function (url) {
     clearTimeout(timeoutId);
     if (err.name === 'AbortError') {
       throw new Error(
-        `Request took too long! Timeout after ${TIMEOUT_SEC} seconds`
+        `Request took too long! Timeout after ${TIMEOUT_SEC} seconds`,
       );
     }
     throw err;

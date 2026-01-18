@@ -1,8 +1,37 @@
-.map {
+.map-container {
+  position: relative;
   height: 400px;
   width: 100%;
+
+  .map__coordinates {
+    position: absolute;
+    bottom: $spacing-sm;
+    left: $spacing-sm;
+    background: rgba($color-white, 0.95);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $radius-sm;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: $color-secondary;
+    display: flex;
+    gap: $spacing-sm;
+    z-index: 1000;
+    box-shadow: $shadow-sm;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .map__lat,
+  .map__lng {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+}
+
+.map {
+  height: 100%;
+  width: 100%;
   background: $color-light;
-  position: relative;
 
   // Leaflet map container
   #map {
@@ -20,30 +49,6 @@
     color: $color-white;
     font-size: 1.25rem;
     font-weight: 500;
-  }
-
-  &__coordinates {
-    position: absolute;
-    bottom: $spacing-sm;
-    left: $spacing-sm;
-    background: rgba($color-white, 0.95);
-    padding: $spacing-xs $spacing-sm;
-    border-radius: $radius-sm;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: $color-secondary;
-    display: flex;
-    gap: $spacing-sm;
-    z-index: 10;
-    box-shadow: $shadow-sm;
-    font-variant-numeric: tabular-nums;
-  }
-
-  &__lat,
-  &__lng {
-    display: flex;
-    align-items: center;
-    gap: $spacing-xs;
   }
 
   &__zoom-in,
