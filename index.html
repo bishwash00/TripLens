@@ -112,7 +112,9 @@
                 class="card__action btn--save"
                 aria-label="Save to bookmarks"
               >
-                <svg><use href="./src/img/icons.svg#icon-bookmark"></use></svg>
+                <svg>
+                  <use href="./src/img/icons.svg#icon-bookmark"></use>
+                </svg>
               </button>
             </div>
           </div>
@@ -386,18 +388,18 @@
           <div class="card__content">
             <div class="saved-trips">
               <!-- Empty State -->
-              <div class="saved-trips__empty">
+              <!-- <div class="saved-trips__empty">
                 <svg><use href="./src/img/icons.svg#icon-bookmark"></use></svg>
                 <p>No saved trips yet</p>
                 <span
                   >Search for a destination and click the bookmark icon to save
                   it</span
                 >
-              </div>
+              </div> -->
               <!-- Trip Items (populated dynamically) -->
-              <div class="saved-trips__list hidden">
+              <div class="saved-trips__list">
                 <!-- Example Trip Item -->
-                <div class="trip" data-city="Tokyo" data-country="Japan">
+                <!-- <div class="trip" data-city="Tokyo" data-country="Japan">
                   <img
                     class="trip__flag"
                     src="https://flagcdn.com/w40/jp.png"
@@ -410,7 +412,7 @@
                   <button class="trip__remove" aria-label="Remove trip">
                     <svg><use href="./src/img/icons.svg#icon-close"></use></svg>
                   </button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

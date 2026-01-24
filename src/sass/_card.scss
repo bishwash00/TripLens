@@ -75,10 +75,17 @@
     }
 
     &.btn--save {
+      svg {
+        color: $color-tertiary;
+        fill: none;
+        transition:
+          color 0.2s,
+          fill 0.2s;
+      }
       &.saved {
         svg {
-          fill: $color-accent;
           color: $color-accent;
+          fill: currentColor;
         }
       }
     }

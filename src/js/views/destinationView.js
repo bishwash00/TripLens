@@ -5,6 +5,8 @@ class destinationView extends View {
   _parentEl = document.querySelector('.destination');
 
   _generateMarkup() {
+    this.updateBookmarkIcons();
+
     return `
     <div class="destination__header">
                 <img

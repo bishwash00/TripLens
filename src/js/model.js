@@ -31,6 +31,7 @@ export const getDataCoords = async function (lat, lng) {
     const data = await getJSON(
       `${GEOCODE_API_URL}latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${BIG_DATA_CLOUD_KEY}`,
     );
+    console.log(data);
 
     await getDestination(data.countryName);
   } catch (err) {
@@ -49,6 +50,7 @@ const getDestinationObject = function (data) {
     currency: Object.values(data.currencies)[0],
     coordinates: data.latlng,
     population: data.population,
+    bookmarked: checkBookmark(data),
     weather: {
       current: {},
       forecast: {},
@@ -134,7 +136,7 @@ const getLocalTime = function (data) {
 export const getDestination = async function (locationName) {
   try {
     const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
-
+    console.log(data);
     state.destination = getDestinationObject(data[0]);
   } catch (err) {
     throw err;
@@ -169,3 +171,46 @@ export const getWeather = async function (locationName) {
     throw err;
   }
 };
+
+const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
+export const addBookmark = function (destination) {
+  state.bookmarks.push(destination);
+  if (destination.countryName === state.destination.countryName)
+    state.destination.bookmarked = true;
+  persistBookmarks();
+};
+
+export const removeBookmark = function (destination) {
+  const index = state.bookmarks.findIndex(
+    bookmark => bookmark.countryName === destination.countryName,
+  );
+  console.log(index);
+  state.bookmarks.splice(index, 1);
+
+  if (destination.countryName === state.destination.countryName)
+    state.destination.bookmarked = false;
+
+  persistBookmarks();
+};
+
+const clearBookmarks = function () {
+  localStorage.clear();
+};
+
+const checkBookmark = function (data) {
+  if (
+    state.bookmarks.some(bookmark => bookmark.countryName === data.name.common)
+  )
+    return true;
+  return false;
+};
+
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  state.bookmarks = storage ? JSON.parse(storage) : [];
+  console.log(state.bookmarks);
+};
+init();

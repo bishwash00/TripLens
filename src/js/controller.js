@@ -7,6 +7,7 @@ import weatherView from './views/weatherView.js';
 import errorView from './views/errorView.js';
 import localTimeView from './views/localTimeView.js';
 import mapView from './views/mapView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 import * as model from './model.js';
 
@@ -23,6 +24,9 @@ const initData = async function () {
     await model.getDataCoords(latitude, longitude);
     await model.getWeather(model.state.destination.capitalName);
 
+    window.location.hash =
+      window.location.hash = `search=${encodeURIComponent(model.state.destination.countryName)}`;
+
     renderDestinationData();
   } catch (err) {
     errorView.render(err);
@@ -33,7 +37,9 @@ const controlDestinationSearch = async function () {
   try {
     renderSkeletonLoaders();
 
-    const query = destinationSearchView.getQuery();
+    const query = window.location.hash.startsWith('#search=')
+      ? decodeURIComponent(window.location.hash.replace('#search=', ''))
+      : '';
 
     await model.getDestination(query);
     await model.getWeather(model.state.destination.capitalName);
@@ -79,11 +85,39 @@ const controlMapDestination = async function (lat, lng) {
   }
 };
 
+const controlBookmarks = function () {
+  const isBookmarked = model.state.bookmarks.some(
+    bookmark => bookmark.countryName === model.state.destination.countryName,
+  );
+  if (!isBookmarked) model.addBookmark(model.state.destination);
+  else model.removeBookmark(model.state.destination);
+
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlRemoveBookmarks = function (countryName) {
+  const bookmark = model.state.bookmarks.find(
+    bookmark => bookmark.countryName === countryName,
+  );
+  console.log(bookmark);
+
+  if (bookmark) model.removeBookmark(bookmark);
+
+  bookmarksView.render(model.state.bookmarks);
+};
+
 const init = async function () {
   await initData();
 
-  destinationSearchView.addHandlerSearch(controlDestinationSearch);
+  bookmarksView.render(model.state.bookmarks);
+
+  destinationSearchView.addHandlerHash(controlDestinationSearch);
+
   errorView.addHandlerErrorBtn(initData);
   mapView.addHandlerMap(controlMapDestination);
+
+  bookmarksView.addHandlerBookmarkAdd(controlBookmarks);
+  bookmarksView.addHandlerBookmarkRemove(controlRemoveBookmarks);
+  bookmarksView.addHandlerBookmarkClick();
 };
 init();
