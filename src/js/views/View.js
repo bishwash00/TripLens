@@ -6,11 +6,12 @@ export default class View {
   _sidebar = document.querySelector('.sidebar');
   _bookmarksCountEl = document.querySelector('.card__count');
   _bookmarkSVG = document.querySelector('.btn--save').querySelector('use');
+  _searchClearBtn = document.querySelector('.card__clear');
   _data;
 
   render(data, viewType = '') {
     this._data = data;
-    console.log(this._data);
+    console.log(data);
 
     const markup = this._generateMarkup();
 

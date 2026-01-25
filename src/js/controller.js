@@ -8,8 +8,11 @@ import errorView from './views/errorView.js';
 import localTimeView from './views/localTimeView.js';
 import mapView from './views/mapView.js';
 import bookmarksView from './views/bookmarksView.js';
+import recentSearchesView from './views/recentSearchesView.js';
 
 import * as model from './model.js';
+
+let skipNextHashChange = false;
 
 const initData = async function () {
   try {
@@ -24,8 +27,10 @@ const initData = async function () {
     await model.getDataCoords(latitude, longitude);
     await model.getWeather(model.state.destination.capitalName);
 
-    window.location.hash =
+    if (!window.location.hash) {
+      skipNextHashChange = true;
       window.location.hash = `search=${encodeURIComponent(model.state.destination.countryName)}`;
+    }
 
     renderDestinationData();
   } catch (err) {
@@ -33,7 +38,7 @@ const initData = async function () {
   }
 };
 
-const controlDestinationSearch = async function () {
+const controlDestinationSearch = async function (isUserSearch = true) {
   try {
     renderSkeletonLoaders();
 
@@ -43,6 +48,8 @@ const controlDestinationSearch = async function () {
 
     await model.getDestination(query);
     await model.getWeather(model.state.destination.capitalName);
+
+    if (isUserSearch) controlRecentSearches();
 
     renderDestinationData();
   } catch (err) {
@@ -62,7 +69,7 @@ const renderDestinationData = function () {
 };
 
 const renderSkeletonLoaders = function () {
-  localTimeView.stopClock(); // Stop the clock before loading new data
+  localTimeView.stopClock();
 
   destinationView.renderSkeletonLoading();
   weatherView.renderSkeletonLoading();
@@ -106,12 +113,35 @@ const controlRemoveBookmarks = function (countryName) {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const init = async function () {
-  await initData();
+const controlRecentSearches = function () {
+  model.addRecentSearch(model.state.destination);
 
+  recentSearchesView.render(model.state.recentSearches);
+};
+
+const controlClearRecentSearches = function () {
+  model.clearRecentSearches();
+
+  recentSearchesView.render(model.state.recentSearches);
+};
+
+const init = async function () {
+  if (window.location.hash && window.location.hash.startsWith('#search=')) {
+    await controlDestinationSearch(false);
+  } else {
+    await initData();
+  }
+
+  recentSearchesView.render(model.state.recentSearches);
   bookmarksView.render(model.state.bookmarks);
 
-  destinationSearchView.addHandlerHash(controlDestinationSearch);
+  destinationSearchView.addHandlerHash(() => {
+    if (skipNextHashChange) {
+      skipNextHashChange = false;
+      return;
+    }
+    controlDestinationSearch(true);
+  });
 
   errorView.addHandlerErrorBtn(initData);
   mapView.addHandlerMap(controlMapDestination);
@@ -119,5 +149,7 @@ const init = async function () {
   bookmarksView.addHandlerBookmarkAdd(controlBookmarks);
   bookmarksView.addHandlerBookmarkRemove(controlRemoveBookmarks);
   bookmarksView.addHandlerBookmarkClick();
+
+  recentSearchesView.addHandlerClearSearch(controlClearRecentSearches);
 };
 init();

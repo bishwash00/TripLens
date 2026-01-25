@@ -31,7 +31,6 @@ export const getDataCoords = async function (lat, lng) {
     const data = await getJSON(
       `${GEOCODE_API_URL}latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${BIG_DATA_CLOUD_KEY}`,
     );
-    console.log(data);
 
     await getDestination(data.countryName);
   } catch (err) {
@@ -93,7 +92,6 @@ const getForecastWeather = function (data) {
 
     days[date].temps.push(entry.main.temp);
 
-    // Prefer 12:00 data for icon/description if available
     if (entry.dt_txt.includes('12:00:00')) {
       days[date].icon = entry.weather[0].icon;
       days[date].description = entry.weather[0].description;
@@ -136,8 +134,18 @@ const getLocalTime = function (data) {
 export const getDestination = async function (locationName) {
   try {
     const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
-    console.log(data);
-    state.destination = getDestinationObject(data[0]);
+
+    const formattedName =
+      locationName.charAt(0).toUpperCase() +
+      locationName.slice(1).toLowerCase();
+    const trip = data.find(
+      dt =>
+        dt.name.common === formattedName ||
+        dt.altSpellings.some(
+          alt => alt.toLowerCase() === locationName.toLowerCase(),
+        ),
+    );
+    state.destination = getDestinationObject(trip);
   } catch (err) {
     throw err;
   }
@@ -176,6 +184,10 @@ const persistBookmarks = function () {
   localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
+const persistRecentSearch = function () {
+  localStorage.setItem('recentSearches', JSON.stringify(state.recentSearches));
+};
+
 export const addBookmark = function (destination) {
   state.bookmarks.push(destination);
   if (destination.countryName === state.destination.countryName)
@@ -196,10 +208,6 @@ export const removeBookmark = function (destination) {
   persistBookmarks();
 };
 
-const clearBookmarks = function () {
-  localStorage.clear();
-};
-
 const checkBookmark = function (data) {
   if (
     state.bookmarks.some(bookmark => bookmark.countryName === data.name.common)
@@ -208,9 +216,25 @@ const checkBookmark = function (data) {
   return false;
 };
 
+export const addRecentSearch = function (destination) {
+  if (state.recentSearches.length > 4) state.recentSearches.splice(-1);
+  state.recentSearches.unshift(destination);
+
+  persistRecentSearch();
+};
+
+export const clearRecentSearches = function () {
+  localStorage.removeItem('recentSearches');
+  state.recentSearches.length = 0;
+};
+
 const init = function () {
-  const storage = localStorage.getItem('bookmarks');
-  state.bookmarks = storage ? JSON.parse(storage) : [];
-  console.log(state.bookmarks);
+  const storageBookmarks = localStorage.getItem('bookmarks');
+  state.bookmarks = storageBookmarks ? JSON.parse(storageBookmarks) : [];
+
+  const storageRecentSearches = localStorage.getItem('recentSearches');
+  state.recentSearches = storageRecentSearches
+    ? JSON.parse(storageRecentSearches)
+    : [];
 };
 init();
