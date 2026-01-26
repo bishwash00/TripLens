@@ -9,6 +9,8 @@ import localTimeView from './views/localTimeView.js';
 import mapView from './views/mapView.js';
 import bookmarksView from './views/bookmarksView.js';
 import recentSearchesView from './views/recentSearchesView.js';
+import loadingOverlayView from './views/loadingOverlayView.js';
+import suggestionsView from './views/suggestionsView.js';
 
 import * as model from './model.js';
 
@@ -34,13 +36,14 @@ const initData = async function () {
 
     renderDestinationData();
   } catch (err) {
-    errorView.render(err);
+    errorView.render(err, 'error');
   }
 };
 
 const controlDestinationSearch = async function (isUserSearch = true) {
   try {
     renderSkeletonLoaders();
+    loadingOverlayView.addOverlay();
 
     const query = window.location.hash.startsWith('#search=')
       ? decodeURIComponent(window.location.hash.replace('#search=', ''))
@@ -51,9 +54,12 @@ const controlDestinationSearch = async function (isUserSearch = true) {
 
     if (isUserSearch) controlRecentSearches();
 
+    loadingOverlayView.removeOverlay();
+
     renderDestinationData();
   } catch (err) {
     errorView.render(err, 'error');
+    loadingOverlayView.removeOverlay();
   }
 };
 
@@ -125,6 +131,16 @@ const controlClearRecentSearches = function () {
   recentSearchesView.render(model.state.recentSearches);
 };
 
+const controlSuggestions = async function (locationName) {
+  try {
+    await model.getSuggestions(locationName);
+
+    suggestionsView.render(model.state.suggestions);
+  } catch (err) {
+    errorView.render(err, 'error');
+  }
+};
+
 const init = async function () {
   if (window.location.hash && window.location.hash.startsWith('#search=')) {
     await controlDestinationSearch(false);
@@ -151,5 +167,8 @@ const init = async function () {
   bookmarksView.addHandlerBookmarkClick();
 
   recentSearchesView.addHandlerClearSearch(controlClearRecentSearches);
+
+  suggestionsView.addHandlerInput(controlSuggestions);
+  suggestionsView.addHandlerClickSearch();
 };
 init();

@@ -1,5 +1,6 @@
 class destinationSearchView {
   _parentEL = document.querySelector('.header__search');
+  _suggestionsEl = document.querySelector('.suggestions__list');
 
   constructor() {
     this._addHandlerSearch();
@@ -19,6 +20,7 @@ class destinationSearchView {
   _addHandlerSearch() {
     this._parentEL.addEventListener('submit', e => {
       e.preventDefault();
+      this._suggestionsEl.classList.add('hidden');
 
       const query = this._getQuery() === '' ? undefined : this._getQuery();
       console.log(query);

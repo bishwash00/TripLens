@@ -24,7 +24,6 @@
       <span>Offline mode: Data may be outdated</span>
     </div>
 
-    <!-- Header -->
     <header class="header">
       <div class="header__container">
         <div class="header__logo">
@@ -45,10 +44,8 @@
             autocomplete="off"
           />
           <!-- Search Suggestions Dropdown -->
-          <div class="header__suggestions hidden">
-            <div class="suggestions__list">
-              <!-- Suggestions will be populated dynamically -->
-            </div>
+          <div class="header__suggestions">
+            <div class="suggestions__list hidden"></div>
           </div>
         </form>
 
@@ -65,7 +62,7 @@
             aria-label="View bookmarks"
           >
             <svg><use href="./src/img/icons.svg#icon-bookmark"></use></svg>
-            <span class="header__bookmark-count">0</span>
+            <span class="header__bookmark-count"></span>
           </button>
         </nav>
       </div>
@@ -73,21 +70,6 @@
 
     <!-- Main Content -->
     <div class="container">
-      <!-- Error Message -->
-      <!-- <div class="error ">
-        <div class="error__content">
-          <svg class="error__icon">
-            <use href="./src/img/icons.svg#icon-error"></use>
-          </svg>
-          <h3 class="error__title">Location Not Found</h3>
-          <p class="error__message">
-            We couldn't find the destination you're looking for. Please try
-            another city or country name.
-          </p>
-          <button class="error__btn btn btn--primary">Try Again</button>
-        </div>
-      </div> -->
-
       <!-- Loading Overlay -->
       <div class="loading-overlay hidden">
         <div class="spinner">
@@ -119,79 +101,8 @@
             </div>
           </div>
           <div class="card__content">
-            <!-- Skeleton Loading State -->
-            <!-- <div class="skeleton skeleton--destination">
-              <div class="skeleton__flag"></div>
-              <div class="skeleton__line skeleton__line--lg"></div>
-              <div class="skeleton__line skeleton__line--md"></div>
-              <div class="skeleton__grid">
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-              </div>
-            </div> -->
             <!-- Actual Content -->
-            <div class="destination">
-              <!-- <div class="destination__header">
-                <img
-                  class="destination__flag"
-                  src="https://flagcdn.com/w80/fr.png"
-                  alt="Country flag"
-                />
-                <div class="destination__titles">
-                  <h3 class="destination__city">Paris</h3>
-                  <p class="destination__country">France</p>
-                </div>
-              </div>
-              <div class="destination__info">
-                <div class="destination__info-item">
-                  <svg class="destination__info-icon">
-                    <use href="./src/img/icons.svg#icon-population"></use>
-                  </svg>
-                  <span class="destination__label">Population</span>
-                  <span class="destination__value">2.16M</span>
-                </div>
-                <div class="destination__info-item">
-                  <svg class="destination__info-icon">
-                    <use href="./src/img/icons.svg#icon-home"></use>
-                  </svg>
-                  <span class="destination__label">Capital</span>
-                  <span class="destination__value">Paris</span>
-                </div>
-                <div class="destination__info-item">
-                  <svg class="destination__info-icon">
-                    <use href="./src/img/icons.svg#icon-globe"></use>
-                  </svg>
-                  <span class="destination__label">Region</span>
-                  <span class="destination__value">Île-de-France</span>
-                </div>
-                <div class="destination__info-item">
-                  <svg class="destination__info-icon">
-                    <use href="./src/img/icons.svg#icon-language"></use>
-                  </svg>
-                  <span class="destination__label">Language</span>
-                  <span class="destination__value">French</span>
-                </div>
-                <div class="destination__info-item">
-                  <svg class="destination__info-icon">
-                    <use href="./src/img/icons.svg#icon-currency"></use>
-                  </svg>
-                  <span class="destination__label">Currency</span>
-                  <span class="destination__value">EUR (€)</span>
-                </div>
-                <div class="destination__info-item">
-                  <svg class="destination__info-icon">
-                    <use href="./src/img/icons.svg#icon-coordinates"></use>
-                  </svg>
-                  <span class="destination__label">Coordinates</span>
-                  <span class="destination__value">48.86°N, 2.35°E</span>
-                </div>
-              </div>
-            </div> -->
-            </div>
+            <div class="destination"></div>
           </div>
         </section>
 
@@ -206,104 +117,7 @@
             </h2>
           </div>
           <div class="card__content">
-            <!-- Skeleton Loading State -->
-            <!-- <div class="skeleton skeleton--weather">
-              <div class="skeleton__weather-main">
-                <div class="skeleton__circle"></div>
-                <div class="skeleton__line skeleton__line--xl"></div>
-                <div class="skeleton__line skeleton__line--md"></div>
-              </div>
-              <div class="skeleton__weather-details">
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-              </div>
-            </div> -->
-            <!-- Actual Content -->
-            <div class="weather">
-              <!-- <div class="weather__current">
-                <img
-                  class="weather__icon"
-                  src="https://openweathermap.org/img/wn/02d@2x.png"
-                  alt="Weather icon"
-                />
-                <div class="weather__temp">22°C</div>
-                <div class="weather__condition">Partly Cloudy</div>
-                 <div class="weather__details">
-                  <div class="weather__detail">
-                    <svg><use href="./src/img/icons.svg#icon-wind"></use></svg>
-                    <span class="weather__detail-label">Wind</span>
-                    <span class="weather__detail-value">12 km/h</span>
-                  </div>  
-                  <div class="weather__detail">
-                    <svg>
-                      <use href="./src/img/icons.svg#icon-humidity"></use>
-                    </svg>
-                    <span class="weather__detail-label">Humidity</span>
-                    <span class="weather__detail-value">65%</span>
-                  </div>
-                    <div class="weather__detail">
-                    <svg><use href="./src/img/icons.svg#icon-pressure"></use></svg>
-                    <span class="weather__detail-label">Pressure</span>
-                    <span class="weather__detail-value">1013 hPa</span>
-                    </div>
-                </div>
-              </div>
-              <div class="weather__forecast">
-                <h4 class="weather__forecast-title">5-Day Forecast</h4>
-                <div class="forecast__list">
-                  <div class="forecast__day">
-                    <span class="forecast__date">Today</span>
-                    <img
-                      class="forecast__icon"
-                      src="https://openweathermap.org/img/wn/01d.png"
-                      alt="Weather"
-                    />
-                    <span class="forecast__condition">Sunny</span>
-                    <span class="forecast__temp">24° / 18°</span>
-                  </div>
-                  <div class="forecast__day">
-                    <span class="forecast__date">Tomorrow</span>
-                    <img
-                      class="forecast__icon"
-                      src="https://openweathermap.org/img/wn/03d.png"
-                      alt="Weather"
-                    />
-                    <span class="forecast__condition">Cloudy</span>
-                    <span class="forecast__temp">20° / 16°</span>
-                  </div>
-                  <div class="forecast__day">
-                    <span class="forecast__date">Wed</span>
-                    <img
-                      class="forecast__icon"
-                      src="https://openweathermap.org/img/wn/10d.png"
-                      alt="Weather"
-                    />
-                    <span class="forecast__condition">Rain</span>
-                    <span class="forecast__temp">18° / 14°</span>
-                  </div>
-                  <div class="forecast__day">
-                    <span class="forecast__date">Thu</span>
-                    <img
-                      class="forecast__icon"
-                      src="https://openweathermap.org/img/wn/01d.png"
-                      alt="Weather"
-                    />
-                    <span class="forecast__condition">Sunny</span>
-                    <span class="forecast__temp">23° / 17°</span>
-                  </div>
-                  <div class="forecast__day">
-                    <span class="forecast__date">Fri</span>
-                    <img
-                      class="forecast__icon"
-                      src="https://openweathermap.org/img/wn/02d.png"
-                      alt="Weather"
-                    />
-                    <span class="forecast__condition">Partly Cloudy</span>
-                    <span class="forecast__temp">22° / 16°</span>
-                  </div>
-                </div>
-              </div> -->
-            </div>
+            <div class="weather"></div>
           </div>
         </section>
 
@@ -318,35 +132,8 @@
             </h2>
           </div>
           <div class="card__content">
-            <!-- Skeleton Loading State -->
-            <!-- <div class="skeleton skeleton--timezone hidden">
-              <div class="skeleton__line skeleton__line--xl"></div>
-              <div class="skeleton__line skeleton__line--md"></div>
-              <div class="skeleton__line skeleton__line--sm"></div>
-              <div class="skeleton__sun-times">
-                <div class="skeleton__box"></div>
-                <div class="skeleton__box"></div>
-              </div>
-            </div> -->
             <!-- Actual Content -->
-            <div class="timezone">
-              <!-- <div class="timezone__time">14:32:15</div>
-              <div class="timezone__date">Tuesday, January 13, 2026</div>
-              <div class="timezone__zone">Central European Time (CET)</div>
-              <div class="timezone__offset">UTC+1</div>
-              <div class="timezone__sun">
-                <div class="timezone__sun-item">
-                  <svg><use href="./src/img/icons.svg#icon-sunrise"></use></svg>
-                  <span class="timezone__sun-label">Sunrise</span>
-                  <span class="timezone__sun-value">07:23</span>
-                </div>
-                <div class="timezone__sun-item">
-                  <svg><use href="./src/img/icons.svg#icon-sunset"></use></svg>
-                  <span class="timezone__sun-label">Sunset</span>
-                  <span class="timezone__sun-value">17:45</span>
-                </div>
-              </div> -->
-            </div>
+            <div class="timezone"></div>
           </div>
         </section>
 
@@ -360,15 +147,7 @@
               Interactive Map
             </h2>
           </div>
-          <div class="card__content card__content--map">
-            <!-- <div class="map" id="map">
-
-            </div>
-            <div class="map__coordinates">
-              <span class="map__lat">Lat: 48.8566</span>
-              <span class="map__lng">Lng: 2.3522</span>
-            </div> -->
-          </div>
+          <div class="card__content card__content--map"></div>
         </section>
       </main>
 
@@ -388,32 +167,9 @@
           <div class="card__content">
             <div class="saved-trips">
               <!-- Empty State -->
-              <!-- <div class="saved-trips__empty">
-                <svg><use href="./src/img/icons.svg#icon-bookmark"></use></svg>
-                <p>No saved trips yet</p>
-                <span
-                  >Search for a destination and click the bookmark icon to save
-                  it</span
-                >
-              </div> -->
+
               <!-- Trip Items (populated dynamically) -->
-              <div class="saved-trips__list">
-                <!-- Example Trip Item -->
-                <!-- <div class="trip" data-city="Tokyo" data-country="Japan">
-                  <img
-                    class="trip__flag"
-                    src="https://flagcdn.com/w40/jp.png"
-                    alt="Country flag"
-                  />
-                  <div class="trip__info">
-                    <h4 class="trip__city">Tokyo</h4>
-                    <p class="trip__country">Japan</p>
-                  </div>
-                  <button class="trip__remove" aria-label="Remove trip">
-                    <svg><use href="./src/img/icons.svg#icon-close"></use></svg>
-                  </button>
-                </div> -->
-              </div>
+              <div class="saved-trips__list"></div>
             </div>
           </div>
         </section>
@@ -435,31 +191,14 @@
             </button>
           </div>
           <div class="card__content">
-            <div class="recent-searches">
-              <!-- <div class="recent-searches__empty hidden">
-                <svg><use href="./src/img/icons.svg#icon-search"></use></svg>
-                <p>No recent searches</p>
-                <span>Your search history will appear here</span>
-              </div>
-            
-              <div class="recent-searches__list">
-            
-                <button class="search-item" data-query="London, UK">
-                  <svg class="search-item__icon">
-                    <use href="./src/img/icons.svg#icon-search"></use>
-                  </svg>
-                  <span class="search-item__text">London, UK</span>
-                  <span class="search-item__time">2 min ago</span>
-                </button>
-              </div> -->
-            </div>
+            <div class="recent-searches"></div>
           </div>
         </section>
       </aside>
     </div>
 
     <!-- Compare Mode Overlay -->
-    <div class="compare-overlay hidden">
+    <div class="compare-overlay">
       <div class="compare">
         <div class="compare__header">
           <h2 class="compare__title">

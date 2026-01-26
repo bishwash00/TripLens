@@ -11,9 +11,6 @@ import {
 import { getJSON } from './helpers';
 
 export const state = {
-  search: {
-    query: '',
-  },
   destination: {
     weather: {
       current: {},
@@ -21,9 +18,10 @@ export const state = {
     },
     localTime: {},
   },
-  location: {},
+  suggestions: [],
   bookmarks: [],
   recentSearches: [],
+  compare: {},
 };
 
 export const getDataCoords = async function (lat, lng) {
@@ -41,7 +39,10 @@ export const getDataCoords = async function (lat, lng) {
 const getDestinationObject = function (data) {
   return {
     countryName: data.name.common,
-    capitalName: data.capital[0],
+    capitalName:
+      Array.isArray(data.capital) && data.capital.length > 0
+        ? data.capital[0]
+        : '',
     countryCode: data.cca2,
     countryFlag: data.flags.png,
     region: data.region,
@@ -55,6 +56,7 @@ const getDestinationObject = function (data) {
       forecast: {},
     },
     localTime: {},
+    searchedTime: new Date(),
   };
 };
 
@@ -134,17 +136,21 @@ const getLocalTime = function (data) {
 export const getDestination = async function (locationName) {
   try {
     const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
+    const trips = data.filter(dt => dt.independent === true);
+    console.log(trips);
 
-    const formattedName =
-      locationName.charAt(0).toUpperCase() +
-      locationName.slice(1).toLowerCase();
-    const trip = data.find(
+    const formattedName = locationName
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+    const trip = trips.find(
       dt =>
         dt.name.common === formattedName ||
         dt.altSpellings.some(
           alt => alt.toLowerCase() === locationName.toLowerCase(),
         ),
     );
+    console.log(trip);
     state.destination = getDestinationObject(trip);
   } catch (err) {
     throw err;
@@ -226,6 +232,18 @@ export const addRecentSearch = function (destination) {
 export const clearRecentSearches = function () {
   localStorage.removeItem('recentSearches');
   state.recentSearches.length = 0;
+};
+
+export const getSuggestions = async function (locationName) {
+  try {
+    state.suggestions.length = 0;
+    const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
+    const trips = data.filter(dt => dt.independent === true);
+
+    if (trips.length > 4) trips.splice(5);
+
+    state.suggestions = trips?.map(dt => getDestinationObject(dt));
+  } catch (err) {}
 };
 
 const init = function () {

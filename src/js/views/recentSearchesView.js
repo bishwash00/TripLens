@@ -25,13 +25,26 @@ class recentSearchesView extends View {
                     <use href="${icons}#icon-search"></use>
                   </svg>
                   <span class="search-item__text">${data.capitalName}, ${data.countryCode}</span>
-                  <span class="search-item__time">2 min ago</span>
+                  <span class="search-item__time">${this._formatSearchTime(data.searchedTime)}</span>
                 </button>
               </div>
             `,
       )
       .join('')}
     `;
+  }
+
+  _formatSearchTime(time) {
+    const min = Math.floor((new Date() - new Date(time)) / 1000 / 60);
+    if (min >= 60) {
+      const hr = Math.floor(min / 60);
+      if (hr >= 24) {
+        const day = Math.floor(hr / 24);
+        return `${day} days ago`;
+      }
+      return `${hr} hours ago`;
+    }
+    return `${min} min ago`;
   }
 
   addHandlerRecentSearch() {

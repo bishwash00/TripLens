@@ -37,6 +37,10 @@ body {
   border: 0;
 }
 
+.no-scroll {
+  overflow: hidden !important;
+}
+
 // Button Base Styles
 .btn {
   display: inline-flex;
