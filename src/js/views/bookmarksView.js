@@ -6,7 +6,6 @@ class bookmarksView extends View {
 
   _generateMarkup() {
     this._bookmarksCountEl.textContent = this._data.length;
-    this._headerBookmarksCountEl.textContent = this._data.length;
 
     if (this._data.length === 0)
       return `

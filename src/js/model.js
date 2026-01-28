@@ -21,7 +21,10 @@ export const state = {
   suggestions: [],
   bookmarks: [],
   recentSearches: [],
-  compare: {},
+  compare: {
+    trip1: {},
+    trip2: {},
+  },
 };
 
 export const getDataCoords = async function (lat, lng) {
@@ -244,6 +247,34 @@ export const getSuggestions = async function (locationName) {
 
     state.suggestions = trips?.map(dt => getDestinationObject(dt));
   } catch (err) {}
+};
+
+export const setCompare = async function (locationName, pos) {
+  try {
+    const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
+
+    const currentWeather = await getJSON(
+      `${CURRENT_WEATHER_API_URL}q=${locationName}&units=metric&appid=${OPENWEATHER_API_KEY}`,
+    );
+
+    const currentTime = await getJSON(
+      `${TIME_API_URL}latitude=${currentWeather.coord.lat}&longitude=${currentWeather.coord.lon}&key=${BIG_DATA_CLOUD_KEY}`,
+    );
+
+    const trip = data.filter(dt => dt.independent === true);
+
+    if (pos === 1) {
+      state.compare.trip1 = getDestinationObject(trip[0]);
+      state.compare.trip1.weather = getCurrentWeather(currentWeather);
+      state.compare.trip1.time = getLocalTime(currentTime);
+    } else {
+      state.compare.trip2 = getDestinationObject(trip[0]);
+      state.compare.trip2.weather = getCurrentWeather(currentWeather);
+      state.compare.trip2.time = getLocalTime(currentTime);
+    }
+  } catch (err) {
+    throw err;
+  }
 };
 
 const init = function () {

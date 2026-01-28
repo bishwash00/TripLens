@@ -1,4 +1,34 @@
 // Compare Destinations Overlay
+.compare__submit-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 2rem 0;
+}
+
+.compare__submit-main {
+  background: $color-secondary;
+  color: $color-white;
+  border: none;
+  border-radius: $radius-md;
+  padding: 0.85rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: $shadow-sm;
+  transition: background 0.2s;
+}
+
+.compare__submit-main:hover {
+  background: $color-primary;
+}
+
+.compare__warning {
+  color: #d32f2f;
+  margin-top: 0.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
 .compare-overlay {
   position: fixed;
   inset: 0;

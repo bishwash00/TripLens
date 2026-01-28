@@ -11,6 +11,7 @@ import bookmarksView from './views/bookmarksView.js';
 import recentSearchesView from './views/recentSearchesView.js';
 import loadingOverlayView from './views/loadingOverlayView.js';
 import suggestionsView from './views/suggestionsView.js';
+import comparisionView from './views/comparisionView.js';
 
 import * as model from './model.js';
 
@@ -92,6 +93,9 @@ const controlMapDestination = async function (lat, lng) {
     await model.getDataCoords(latitude, longitude);
     await model.getWeather(model.state.destination.capitalName);
 
+    skipNextHashChange = true;
+    window.location.hash = `search=${encodeURIComponent(model.state.destination.countryName)}`;
+
     renderDestinationData();
   } catch (err) {
     errorView.render(err, 'error');
@@ -141,6 +145,33 @@ const controlSuggestions = async function (locationName) {
   }
 };
 
+const controlCompare = async function (locationName, pos) {
+  try {
+    await model.setCompare(locationName, pos);
+
+    console.log(model.state.compare);
+    pos === 1
+      ? comparisionView.render(model.state.compare.trip1)
+      : comparisionView.render(model.state.compare.trip2);
+  } catch (err) {
+    errorView.render(err, 'error');
+  }
+};
+
+const controlComparisonView = function () {
+  const isEmpty = obj =>
+    obj == null || (typeof obj === 'object' && Object.keys(obj).length === 0);
+
+  if (
+    isEmpty(model.state.compare.trip1) ||
+    isEmpty(model.state.compare.trip2)
+  ) {
+    comparisionView.addWarning();
+    return;
+  }
+  comparisionView.renderComparison(model.state.compare);
+};
+
 const init = async function () {
   if (window.location.hash && window.location.hash.startsWith('#search=')) {
     await controlDestinationSearch(false);
@@ -170,5 +201,8 @@ const init = async function () {
 
   suggestionsView.addHandlerInput(controlSuggestions);
   suggestionsView.addHandlerClickSearch();
+
+  comparisionView.addHandlerSubmit(controlCompare);
+  comparisionView.addHandlerCompareBtn(controlComparisonView);
 };
 init();

@@ -57,13 +57,6 @@
             <svg><use href="./src/img/icons.svg#icon-compare"></use></svg>
             <span class="header__nav-text">Compare</span>
           </button>
-          <button
-            class="header__nav-btn header__bookmark"
-            aria-label="View bookmarks"
-          >
-            <svg><use href="./src/img/icons.svg#icon-bookmark"></use></svg>
-            <span class="header__bookmark-count"></span>
-          </button>
         </nav>
       </div>
     </header>
@@ -198,7 +191,7 @@
     </div>
 
     <!-- Compare Mode Overlay -->
-    <div class="compare-overlay">
+    <div class="compare-overlay hidden">
       <div class="compare">
         <div class="compare__header">
           <h2 class="compare__title">
@@ -212,14 +205,15 @@
         <div class="compare__content">
           <!-- Destination 1 Selection -->
           <div class="compare__selection compare__selection--1">
-            <div class="compare__search">
+            <form class="compare__search">
               <svg><use href="./src/img/icons.svg#icon-search"></use></svg>
               <input
                 type="text"
                 placeholder="Search first destination..."
                 class="compare__input"
               />
-            </div>
+            </form>
+
             <!-- Compare Card 1 -->
             <div class="compare__card compare__card--empty">
               <div class="compare__card-placeholder">
@@ -238,14 +232,14 @@
 
           <!-- Destination 2 Selection -->
           <div class="compare__selection compare__selection--2">
-            <div class="compare__search">
+            <form class="compare__search">
               <svg><use href="./src/img/icons.svg#icon-search"></use></svg>
               <input
                 type="text"
-                placeholder="Search second destination..."
+                placeholder="Search first destination..."
                 class="compare__input"
               />
-            </div>
+            </form>
             <!-- Compare Card 2 -->
             <div class="compare__card compare__card--empty">
               <div class="compare__card-placeholder">
@@ -258,77 +252,20 @@
           </div>
         </div>
 
-        <!-- Comparison Results -->
-        <div class="compare__results hidden">
-          <h3 class="compare__results-title">Comparison Results</h3>
-          <div class="compare__table">
-            <div class="compare__row compare__row--header">
-              <span class="compare__cell">Metric</span>
-              <span class="compare__cell compare__cell--1">Destination 1</span>
-              <span class="compare__cell compare__cell--2">Destination 2</span>
-            </div>
-            <div class="compare__row">
-              <span class="compare__cell compare__cell--label"
-                >Temperature</span
-              >
-              <span class="compare__cell compare__cell--1">22°C</span>
-              <span class="compare__cell compare__cell--2">28°C</span>
-            </div>
-            <div class="compare__row">
-              <span class="compare__cell compare__cell--label">Weather</span>
-              <span class="compare__cell compare__cell--1">Sunny</span>
-              <span class="compare__cell compare__cell--2">Cloudy</span>
-            </div>
-            <div class="compare__row">
-              <span class="compare__cell compare__cell--label">Local Time</span>
-              <span class="compare__cell compare__cell--1">14:32</span>
-              <span class="compare__cell compare__cell--2">22:32</span>
-            </div>
-            <div class="compare__row">
-              <span class="compare__cell compare__cell--label">Population</span>
-              <span class="compare__cell compare__cell--1">2.16M</span>
-              <span class="compare__cell compare__cell--2">13.96M</span>
-            </div>
-            <div class="compare__row">
-              <span class="compare__cell compare__cell--label">Currency</span>
-              <span class="compare__cell compare__cell--1">EUR (€)</span>
-              <span class="compare__cell compare__cell--2">JPY (¥)</span>
-            </div>
-            <div class="compare__row">
-              <span class="compare__cell compare__cell--label">Language</span>
-              <span class="compare__cell compare__cell--1">French</span>
-              <span class="compare__cell compare__cell--2">Japanese</span>
-            </div>
-          </div>
+        <div class="compare__warning hidden">
+          Both destinations must be selected to compare.
         </div>
-      </div>
-    </div>
 
-    <!-- Bookmarks Panel (Slide-out) -->
-    <div class="bookmarks-panel hidden">
-      <div class="bookmarks-panel__overlay"></div>
-      <div class="bookmarks-panel__content">
-        <div class="bookmarks-panel__header">
-          <h2>
-            <svg><use href="./src/img/icons.svg#icon-bookmark"></use></svg>
-            Your Bookmarks
-          </h2>
-          <button
-            class="bookmarks-panel__close"
-            aria-label="Close bookmarks panel"
-          >
-            <svg><use href="./src/img/icons.svg#icon-close"></use></svg>
+        <div class="compare__submit-container">
+          <button class="compare__submit-main" type="submit">
+            Show Comparison
           </button>
         </div>
-        <div class="bookmarks-panel__list">
-          <!-- Bookmarked destinations will be populated here -->
-        </div>
+
+        <div class="compare__results"></div>
       </div>
     </div>
 
-    <!-- Toast Notifications -->
-    <div class="toast-container">
-      <!-- Toast messages will be appended here dynamically -->
-    </div>
+    <div class="toast-container"></div>
   </body>
 </html>

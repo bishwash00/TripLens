@@ -6,7 +6,6 @@ export default class View {
   _searchBar = document.querySelector('.header__search-input');
   _sidebar = document.querySelector('.sidebar');
   _bookmarksCountEl = document.querySelector('.card__count');
-  _headerBookmarksCountEl = document.querySelector('.header__bookmark-count');
   _bookmarkSVG = document.querySelector('.btn--save').querySelector('use');
   _searchClearBtn = document.querySelector('.card__clear');
   _data;
