@@ -67,8 +67,8 @@ class bookmarksView extends View {
     this._parentEl.addEventListener('click', function (e) {
       const trip = e.target.closest('.trip');
       if (!trip) return;
-
-      console.log(trip);
+      const countryName = trip.dataset.country;
+      if (handler) handler(countryName);
     });
   }
 }

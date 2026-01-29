@@ -12,6 +12,7 @@ import recentSearchesView from './views/recentSearchesView.js';
 import loadingOverlayView from './views/loadingOverlayView.js';
 import suggestionsView from './views/suggestionsView.js';
 import comparisionView from './views/comparisionView.js';
+import offlineBannerView from './views/offlineBannerView.js';
 
 import * as model from './model.js';
 
@@ -123,6 +124,17 @@ const controlRemoveBookmarks = function (countryName) {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarkClick = async function (countryName) {
+  const bookmark = model.state.bookmarks.find(
+    b => b.countryName === countryName,
+  );
+  if (!bookmark) return;
+  // Fetch and render all necessary data
+  await model.getDestination(bookmark.countryName);
+  await model.getWeather(bookmark.capitalName);
+  renderDestinationData();
+};
+
 const controlRecentSearches = function () {
   model.addRecentSearch(model.state.destination);
 
@@ -195,8 +207,19 @@ const init = async function () {
 
   bookmarksView.addHandlerBookmarkAdd(controlBookmarks);
   bookmarksView.addHandlerBookmarkRemove(controlRemoveBookmarks);
-  bookmarksView.addHandlerBookmarkClick();
+  bookmarksView.addHandlerBookmarkClick(controlBookmarkClick);
 
+  recentSearchesView.addHandlerRecentSearchClick(
+    async (capitalName, countryCode) => {
+      const recent = model.state.recentSearches.find(
+        r => r.capitalName === capitalName && r.countryCode === countryCode,
+      );
+      if (!recent) return;
+      await model.getDestination(recent.countryName);
+      await model.getWeather(recent.capitalName);
+      renderDestinationData();
+    },
+  );
   recentSearchesView.addHandlerClearSearch(controlClearRecentSearches);
 
   suggestionsView.addHandlerInput(controlSuggestions);
@@ -204,5 +227,7 @@ const init = async function () {
 
   comparisionView.addHandlerSubmit(controlCompare);
   comparisionView.addHandlerCompareBtn(controlComparisonView);
+
+  offlineBannerView.addNetworkListeners();
 };
 init();

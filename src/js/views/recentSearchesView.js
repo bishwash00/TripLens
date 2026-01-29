@@ -56,6 +56,17 @@ class recentSearchesView extends View {
   addHandlerClearSearch(handler) {
     this._searchClearBtn.addEventListener('click', handler);
   }
+
+  addHandlerRecentSearchClick(handler) {
+    this._parentEl.addEventListener('click', function (e) {
+      const btn = e.target.closest('.search-item');
+      if (!btn) return;
+      const [capitalName, countryCode] = btn.dataset.query
+        .split(',')
+        .map(s => s.trim());
+      if (handler) handler(capitalName, countryCode);
+    });
+  }
 }
 
 export default new recentSearchesView();
