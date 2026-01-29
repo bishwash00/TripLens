@@ -1,188 +1,87 @@
 # 🌍 TripLens
 
-**TripLens** is a modern travel & city‑insights web application built with **vanilla JavaScript**. It allows users to search any city in the world and instantly explore **current weather**, **5‑day forecast**, **map location**, and **local information**, all powered by real APIs.
-
-This project was built with a strong focus on **real‑world architecture, async JavaScript, API chaining, and state management**.
+TripLens is a modern travel and city insights web application built with vanilla JavaScript. It allows users to search for any country, view current weather, a 5-day forecast, interactive map, local time, and compare destinations. All data is powered by real APIs.
 
 ---
 
 ## ✨ Features
 
-- 🔍 **City search by name** (global support)
-- 📍 **Geocoding** (city → latitude/longitude)
-- ☁️ **Current weather** (real‑time)
-- 📅 **5‑day forecast** (aggregated from 3‑hour data)
-- 🗺️ **Interactive map** with city marker
-- 🕒 **Timezone‑aware date handling** (Today / Tomorrow / weekday)
-- ⚠️ Graceful **error handling** & loading states
-
----
-
-## 🧠 What This Project Demonstrates
-
-This is **not a beginner tutorial app**. TripLens demonstrates:
-
-- Asynchronous JavaScript (`async / await`)
-- API chaining & data normalization
-- Centralized **state management** (MVC‑style)
-- Separation of concerns (model / view / controller)
-- Real‑world handling of **timezones** and dates
-- Accessibility‑aware UI design
+- **Search for a country** by name
+- **Current weather** for the capital city
+- **5-day weather forecast** (daily min/max, icon, description)
+- **Interactive map** (Leaflet.js, click to update destination)
+- **Local time** and timezone info for the destination
+- **Bookmark destinations** for quick access
+- **Recent searches** (last 5 destinations)
+- **Destination comparison** (compare two countries on weather, time, population, currency, language)
+- **Suggestions** as you type in the search bar
+- **Offline banner** when network is lost
+- **Loading overlays** and skeleton screens
+- **Graceful error handling**
 
 ---
 
 ## 🧱 Tech Stack
 
-- **JavaScript (ES6+)**
-- **HTML5**
-- **CSS3** (custom design system)
-- **Fetch API**
-- **Leaflet.js** (maps)
+- JavaScript (ES6+)
+- HTML5
+- CSS3 (Sass)
+- Fetch API
+- Leaflet.js (maps)
 
-No frameworks, no libraries — **pure JavaScript**.
+No frameworks, no build step required.
 
 ---
 
 ## 🌐 APIs Used
 
-### 1️⃣ OpenWeather – Geocoding API
-
-Converts city name → latitude & longitude
-
-```
-https://api.openweathermap.org/geo/1.0/direct
-```
+- **OpenWeather** (current weather, 5-day forecast)
+- **BigDataCloud** (reverse geocoding)
+- **REST Countries** (country info)
+- **Leaflet + OpenStreetMap** (maps)
 
 ---
 
-### 2️⃣ OpenWeather – Current Weather API
+## 🗂️ Main Functionalities
 
-Real‑time weather data
-
-```
-https://api.openweathermap.org/data/2.5/weather
-```
-
----
-
-### 3️⃣ OpenWeather – 5‑Day / 3‑Hour Forecast API
-
-Used to compute a **daily forecast**
-
-```
-https://api.openweathermap.org/data/2.5/forecast
-```
-
----
-
-### 4️⃣ Leaflet + OpenStreetMap
-
-Interactive maps (no API key required)
-
----
-
-### 5️⃣ (Optional) Reverse Geocoding – BigDataCloud
-
-Latitude/longitude → city & country (free, no key)
-
-```
-https://api.bigdatacloud.net/data/reverse-geocode-client
-```
-
----
-
-## 🗂️ Application State Structure
-
-```js
-state = {
-  location: {
-    city: '',
-    country: '',
-    lat: null,
-    lng: null,
-    timezone: null,
-  },
-  weather: {
-    current: {},
-    forecast: [],
-  },
-  ui: {
-    isLoading: false,
-    error: '',
-  },
-};
-```
-
----
-
-## 🕒 Timezone‑Correct Forecast Logic
-
-Because users and searched cities can be in **different timezones**, TripLens uses the timezone offset returned by the API to correctly label forecast days as:
-
-```
-Today
-Tomorrow
-Wed
-Thu
-```
-
-This avoids common bugs where dates appear **one day early or late**.
+- **Destination Search:** Search for a country and view its capital, region, population, language, currency, and coordinates.
+- **Weather:** View current weather and a 5-day forecast for the capital city.
+- **Map:** Interactive map with marker for the capital; click on the map to update the destination.
+- **Local Time:** See the local time, date, timezone, sunrise, and sunset for the destination.
+- **Bookmarks:** Save and remove favorite destinations. Bookmarks are persisted in local storage.
+- **Recent Searches:** Quickly revisit the last 5 searched destinations. Clear all with one click.
+- **Suggestions:** Get live suggestions as you type in the search bar.
+- **Compare:** Compare two destinations side-by-side on weather, time, population, currency, and language.
+- **Offline Banner:** Notifies when the app is offline.
+- **Loading & Error States:** Skeleton loaders and overlays for async actions, with user-friendly error messages.
 
 ---
 
 ## 🚀 Getting Started
 
 1. Clone the repository
-
-```
-git clone https://github.com/your-username/TripLens.git
-```
-
-2. Install dependencies (none required)
-
-3. Add your OpenWeather API key
-
-```js
-const API_KEY = 'YOUR_API_KEY';
-```
-
-4. Run using a local server (recommended)
+   ```
+   git clone <your-repo-url>
+   ```
+2. Add your OpenWeather API key in `src/js/config.js`
+3. Open `index.html` with a local server (e.g. Live Server extension)
 
 ---
 
-## 🧪 Suggested Test Cities
+## 🧪 Example Destinations
 
-- Kathmandu (Nepal)
-- London (UK)
-- New York (USA)
-- Tokyo (Japan)
-- Sydney (Australia)
-
-These help verify timezone correctness.
-
----
-
-## 📈 Future Improvements
-
-- Autocomplete city search
-- Save recent searches
-- Unit preference toggle (°C / °F)
-- Offline caching
-- Country & currency info
-
----
-
-## 🙌 Credits
-
-- Weather data by **OpenWeather**
-- Maps by **OpenStreetMap**
+- Nepal
+- United Kingdom
+- United States
+- Japan
+- Australia
 
 ---
 
 ## 📄 License
 
-This project is for **learning and portfolio purposes**.
+This project is for learning and portfolio purposes only.
 
 ---
 
-**TripLens — See the world, one city at a time.** 🌍
+**TripLens — See the world, one country at a time.** 🌍
