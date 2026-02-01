@@ -13,6 +13,7 @@ class destinationView extends View {
                   class="destination__flag"
                   src="${this._data.countryFlag}"
                   alt="Country flag"
+                  loading="lazy"
                 />
                 <div class="destination__titles">
                   <h3 class="destination__city">${this._data.capitalName}</h3>

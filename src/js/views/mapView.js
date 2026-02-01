@@ -36,19 +36,26 @@ class mapView extends View {
       delete container._leaflet_id;
     }
 
-    this._map = L.map('map').setView([lat, lng], 13);
+    // Use requestAnimationFrame to defer map initialization
+    requestAnimationFrame(() => {
+      this._map = L.map('map', {
+        preferCanvas: true, // Use canvas renderer for better performance
+      }).setView([lat, lng], 13);
 
-    L.tileLayer(
-      'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-      {
-        attribution: '© OpenStreetMap contributors © CARTO',
-      },
-    ).addTo(this._map);
+      L.tileLayer(
+        'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+        {
+          attribution: '© OpenStreetMap contributors © CARTO',
+          maxZoom: 19,
+          updateWhenIdle: true, // Defer tile loading until map interaction ends
+        },
+      ).addTo(this._map);
 
-    this._marker = L.marker([lat, lng]).addTo(this._map);
+      this._marker = L.marker([lat, lng]).addTo(this._map);
 
-    // Re-attach handler if it exists
-    if (this._handler) this._attachClickHandler();
+      // Re-attach handler if it exists
+      if (this._handler) this._attachClickHandler();
+    });
   }
 
   _attachClickHandler() {

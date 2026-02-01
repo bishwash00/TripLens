@@ -117,7 +117,6 @@ const controlRemoveBookmarks = function (countryName) {
   const bookmark = model.state.bookmarks.find(
     bookmark => bookmark.countryName === countryName,
   );
-  console.log(bookmark);
 
   if (bookmark) model.removeBookmark(bookmark);
 
@@ -161,7 +160,6 @@ const controlCompare = async function (locationName, pos) {
   try {
     await model.setCompare(locationName, pos);
 
-    console.log(model.state.compare);
     pos === 1
       ? comparisionView.render(model.state.compare.trip1)
       : comparisionView.render(model.state.compare.trip2);

@@ -1,8 +1,10 @@
 import icons from 'url:../../img/icons.svg';
 import View from './View';
+import { debounce } from '../helpers.js';
 
 class suggestionsView extends View {
   _parentEl = document.querySelector('.suggestions__list');
+  _debouncedHandler = null;
 
   _generateMarkup() {
     if (this._data.length === 0)
@@ -32,11 +34,13 @@ class suggestionsView extends View {
   }
 
   addHandlerInput(handler) {
+    this._debouncedHandler = debounce(handler, 300);
+
     this._searchBar.addEventListener('input', e => {
       this._parentEl.classList.remove('hidden');
       const input = e.target.value;
       if (input.trim() !== '') {
-        handler(input);
+        this._debouncedHandler(input);
       } else {
         this._parentEl.classList.add('hidden');
       }
@@ -48,7 +52,6 @@ class suggestionsView extends View {
       const el = e.target.closest('.suggestion-item__text');
       if (!el) return;
       const query = el.dataset.country;
-      console.log(query);
 
       window.location.hash = `search=${encodeURIComponent(query)}`;
       this._searchBar.value = '';

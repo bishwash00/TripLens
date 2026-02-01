@@ -23,7 +23,6 @@ class destinationSearchView {
       this._suggestionsEl.classList.add('hidden');
 
       const query = this._getQuery() === '' ? undefined : this._getQuery();
-      console.log(query);
       window.location.hash = `search=${encodeURIComponent(query)}`;
 
       this._clearInput();

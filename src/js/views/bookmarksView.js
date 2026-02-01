@@ -27,6 +27,7 @@ class bookmarksView extends View {
                     class="trip__flag"
                     src="${data.countryFlag}"
                     alt="Country flag"
+                    loading="lazy"
                   />
                   <div class="trip__info">
                     <h4 class="trip__city">${data.capitalName}</h4>
@@ -57,7 +58,6 @@ class bookmarksView extends View {
 
       const tripEl = btn.closest('.trip');
       const countryName = tripEl.dataset.country;
-      console.log(countryName);
       handler(countryName);
       this.updateBookmarkIcons();
     });

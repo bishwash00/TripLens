@@ -30,10 +30,8 @@ export default class View {
   checkBookmarkIcon() {
     if (this._data.bookmarked) {
       this._bookmarkSVG.setAttribute('href', `${icons}#icon-bookmark-fill`);
-      console.log(true);
     } else {
       this._bookmarkSVG.setAttribute('href', `${icons}#icon-bookmark`);
-      console.log(false);
     }
   }
 

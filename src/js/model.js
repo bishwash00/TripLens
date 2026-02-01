@@ -140,7 +140,6 @@ export const getDestination = async function (locationName) {
   try {
     const data = await getJSON(`${COUNTRY_API_URL_NAME}${locationName}`);
     const trips = data.filter(dt => dt.independent === true);
-    console.log(trips);
 
     const formattedName = locationName
       .split(' ')
@@ -153,7 +152,6 @@ export const getDestination = async function (locationName) {
           alt => alt.toLowerCase() === locationName.toLowerCase(),
         ),
     );
-    console.log(trip);
     state.destination = getDestinationObject(trip);
   } catch (err) {
     throw err;
@@ -208,7 +206,6 @@ export const removeBookmark = function (destination) {
   const index = state.bookmarks.findIndex(
     bookmark => bookmark.countryName === destination.countryName,
   );
-  console.log(index);
   state.bookmarks.splice(index, 1);
 
   if (destination.countryName === state.destination.countryName)

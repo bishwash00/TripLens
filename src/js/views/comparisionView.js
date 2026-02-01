@@ -17,7 +17,6 @@ class comparisionView {
 
   render(data) {
     this._data = data;
-    console.log(this._data);
     const markup = this._generateMarkup();
 
     [...this._activeCompareEl.children].forEach(child => {

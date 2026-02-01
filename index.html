@@ -6,6 +6,10 @@
     <title>TripLens - Discover Your Next Destination</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://restcountries.com" />
+    <link rel="dns-prefetch" href="https://api-bdc.net" />
+    <link rel="dns-prefetch" href="https://api.openweathermap.org" />
+    <link rel="preconnect" href="https://api.openweathermap.org" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -16,7 +20,7 @@
     />
     <link rel="icon" href="./src/img/image.png" type="png" />
     <link rel="stylesheet" href="./src/sass/main.scss" />
-    <script type="module" src="./src/js/controller.js"></script>
+    <script type="module" src="./src/js/controller.js" defer></script>
   </head>
   <body>
     <!-- Offline Banner -->
@@ -35,6 +39,7 @@
             src="/src/img/image.png"
             alt="triplens logo"
             class="header__logo-icon"
+            loading="eager"
           />
           <h1 class="header__logo-text">TripLens</h1>
         </div>
